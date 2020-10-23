@@ -1,0 +1,56 @@
+import random
+from words import word_list
+
+word = random.choice(word_list)
+
+blank_list = "-" * len(word)
+wrong_guesses = 0
+guessed = ("false")
+print(blank_list)
+print ("This is a game of hangman.")
+
+while wrong_guesses < 6 and guessed == "false":
+    guess = input("Enter a letter.")
+    guess = guess.lower()
+    if guess not in word:
+      wrong_guesses = wrong_guesses + 1
+      print(guess,"is NOT part of the secret word.")
+    if guess in word:
+      print (guess, "is part of the word! Good job!")
+      indices = [i for i, letter in enumerate(word) if letter == guess]
+      for index in indices:
+        blank_list = list(blank_list)
+        blank_list[index] = guess 
+        print(blank_list)
+    if "-" not in blank_list:
+      guessed = "true"
+      print ("Congratulations! You have guessed the word!")
+    if wrong_guesses == 1:
+      print("   ( )   ")
+    if wrong_guesses == 2:
+      print("   ( )   ")
+      print("    |    ")
+      print("    |    ")
+    if wrong_guesses == 3:
+      print("   ( )   ")
+      print("   /|    ")
+      print("  / |    ")
+    
+    if wrong_guesses == 4:
+      print("   ( )   ")
+      print("   /|\   ")
+      print("  / | \  ")
+    if wrong_guesses == 5:
+      print("   ( )   ")
+      print("   /|\   ")
+      print("  / | \  ")
+      print("   /     ")
+      print("  /      ")
+    if wrong_guesses == 6:
+      print("   ( )   ")
+      print("   /|\   ")
+      print("  / | \  ")
+      print("   / \   ")
+      print("  /   \  ")
+      print("Game Over!")
+      print("The correct word was", word)
